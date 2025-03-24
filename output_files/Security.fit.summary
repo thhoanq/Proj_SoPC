@@ -1,14 +1,14 @@
-Fitter Status : Successful - Mon Mar 24 21:17:55 2025
-Quartus Prime Version : 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+Fitter Status : Successful - Mon Mar 24 16:32:20 2025
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 Revision Name : Security
 Top-level Entity Name : Security
 Family : Cyclone IV E
 Device : EP4CE115F29C7
 Timing Models : Final
-Total logic elements : 3,192 / 114,480 ( 3 % )
-    Total combinational functions : 2,979 / 114,480 ( 3 % )
-    Dedicated logic registers : 1,706 / 114,480 ( 1 % )
-Total registers : 1706
+Total logic elements : 10,076 / 114,480 ( 9 % )
+    Total combinational functions : 9,233 / 114,480 ( 8 % )
+    Dedicated logic registers : 3,623 / 114,480 ( 3 % )
+Total registers : 3623
 Total pins : 2 / 529 ( < 1 % )
 Total virtual pins : 0
 Total memory bits : 273,408 / 3,981,312 ( 7 % )

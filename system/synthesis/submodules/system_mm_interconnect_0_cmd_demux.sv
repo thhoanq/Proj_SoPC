@@ -1,4 +1,4 @@
-// (C) 2001-2020 Intel Corporation. All rights reserved.
+// (C) 2001-2018 Intel Corporation. All rights reserved.
 // Your use of Intel Corporation's design tools, logic functions and other 
 // software and tools, and its AMPP partner logic functions, and any output 
 // files from any of the foregoing (including device programming or simulation 
@@ -11,9 +11,9 @@
 // agreement for further details.
 
 
-// $Id: //acds/rel/20.1std/ip/merlin/altera_merlin_demultiplexer/altera_merlin_demultiplexer.sv.terp#1 $
+// $Id: //acds/rel/18.1std/ip/merlin/altera_merlin_demultiplexer/altera_merlin_demultiplexer.sv.terp#1 $
 // $Revision: #1 $
-// $Date: 2019/10/06 $
+// $Date: 2018/07/18 $
 // $Author: psgswbuild $
 
 // -------------------------------------
@@ -28,9 +28,9 @@
 // ------------------------------------------
 // Generation parameters:
 //   output_name:         system_mm_interconnect_0_cmd_demux
-//   ST_DATA_W:           91
-//   ST_CHANNEL_W:        4
-//   NUM_OUTPUTS:         4
+//   ST_DATA_W:           93
+//   ST_CHANNEL_W:        5
+//   NUM_OUTPUTS:         5
 //   VALID_WIDTH:         1
 // ------------------------------------------
 
@@ -46,8 +46,8 @@ module system_mm_interconnect_0_cmd_demux
     // Sink
     // -------------------
     input  [1-1      : 0]   sink_valid,
-    input  [91-1    : 0]   sink_data, // ST_DATA_W=91
-    input  [4-1 : 0]   sink_channel, // ST_CHANNEL_W=4
+    input  [93-1    : 0]   sink_data, // ST_DATA_W=93
+    input  [5-1 : 0]   sink_channel, // ST_CHANNEL_W=5
     input                         sink_startofpacket,
     input                         sink_endofpacket,
     output                        sink_ready,
@@ -56,32 +56,39 @@ module system_mm_interconnect_0_cmd_demux
     // Sources 
     // -------------------
     output reg                      src0_valid,
-    output reg [91-1    : 0] src0_data, // ST_DATA_W=91
-    output reg [4-1 : 0] src0_channel, // ST_CHANNEL_W=4
+    output reg [93-1    : 0] src0_data, // ST_DATA_W=93
+    output reg [5-1 : 0] src0_channel, // ST_CHANNEL_W=5
     output reg                      src0_startofpacket,
     output reg                      src0_endofpacket,
     input                           src0_ready,
 
     output reg                      src1_valid,
-    output reg [91-1    : 0] src1_data, // ST_DATA_W=91
-    output reg [4-1 : 0] src1_channel, // ST_CHANNEL_W=4
+    output reg [93-1    : 0] src1_data, // ST_DATA_W=93
+    output reg [5-1 : 0] src1_channel, // ST_CHANNEL_W=5
     output reg                      src1_startofpacket,
     output reg                      src1_endofpacket,
     input                           src1_ready,
 
     output reg                      src2_valid,
-    output reg [91-1    : 0] src2_data, // ST_DATA_W=91
-    output reg [4-1 : 0] src2_channel, // ST_CHANNEL_W=4
+    output reg [93-1    : 0] src2_data, // ST_DATA_W=93
+    output reg [5-1 : 0] src2_channel, // ST_CHANNEL_W=5
     output reg                      src2_startofpacket,
     output reg                      src2_endofpacket,
     input                           src2_ready,
 
     output reg                      src3_valid,
-    output reg [91-1    : 0] src3_data, // ST_DATA_W=91
-    output reg [4-1 : 0] src3_channel, // ST_CHANNEL_W=4
+    output reg [93-1    : 0] src3_data, // ST_DATA_W=93
+    output reg [5-1 : 0] src3_channel, // ST_CHANNEL_W=5
     output reg                      src3_startofpacket,
     output reg                      src3_endofpacket,
     input                           src3_ready,
+
+    output reg                      src4_valid,
+    output reg [93-1    : 0] src4_data, // ST_DATA_W=93
+    output reg [5-1 : 0] src4_channel, // ST_CHANNEL_W=5
+    output reg                      src4_startofpacket,
+    output reg                      src4_endofpacket,
+    input                           src4_ready,
 
 
     // -------------------
@@ -94,7 +101,7 @@ module system_mm_interconnect_0_cmd_demux
 
 );
 
-    localparam NUM_OUTPUTS = 4;
+    localparam NUM_OUTPUTS = 5;
     wire [NUM_OUTPUTS - 1 : 0] ready_vector;
 
     // -------------------
@@ -129,6 +136,13 @@ module system_mm_interconnect_0_cmd_demux
 
         src3_valid         = sink_channel[3] && sink_valid;
 
+        src4_data          = sink_data;
+        src4_startofpacket = sink_startofpacket;
+        src4_endofpacket   = sink_endofpacket;
+        src4_channel       = sink_channel >> NUM_OUTPUTS;
+
+        src4_valid         = sink_channel[4] && sink_valid;
+
     end
 
     // -------------------
@@ -138,6 +152,7 @@ module system_mm_interconnect_0_cmd_demux
     assign ready_vector[1] = src1_ready;
     assign ready_vector[2] = src2_ready;
     assign ready_vector[3] = src3_ready;
+    assign ready_vector[4] = src4_ready;
 
     assign sink_ready = |(sink_channel & ready_vector);
 

@@ -1,12 +1,12 @@
-Analysis & Synthesis Status : Successful - Mon Mar 24 21:17:37 2025
-Quartus Prime Version : 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+Analysis & Synthesis Status : Successful - Mon Mar 24 16:31:49 2025
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 Revision Name : Security
 Top-level Entity Name : Security
 Family : Cyclone IV E
-Total logic elements : 3,241
-    Total combinational functions : 2,973
-    Dedicated logic registers : 1,714
-Total registers : 1714
+Total logic elements : 10,016
+    Total combinational functions : 9,227
+    Dedicated logic registers : 3,631
+Total registers : 3631
 Total pins : 2
 Total virtual pins : 0
 Total memory bits : 273,408

@@ -4,7 +4,7 @@
  * Machine generated for CPU 'nios2_gen2_0' in SOPC Builder design 'system'
  * SOPC Builder design path: ../../system.sopcinfo
  *
- * Generated: Mon Mar 24 15:35:37 ICT 2025
+ * Generated: Mon Mar 24 16:22:09 ICT 2025
  */
 
 /*
@@ -136,6 +136,7 @@
 #define __ALTERA_AVALON_JTAG_UART
 #define __ALTERA_AVALON_ONCHIP_MEMORY2
 #define __ALTERA_NIOS2_GEN2
+#define __BLAKE2S
 #define __KLEIN64
 
 
@@ -155,24 +156,38 @@
 #define ALT_NUM_INTERNAL_INTERRUPT_CONTROLLERS 1
 #define ALT_NUM_INTERRUPT_CONTROLLERS 1
 #define ALT_STDERR "/dev/jtag_uart_0"
-#define ALT_STDERR_BASE 0x11408
+#define ALT_STDERR_BASE 0x11808
 #define ALT_STDERR_DEV jtag_uart_0
 #define ALT_STDERR_IS_JTAG_UART
 #define ALT_STDERR_PRESENT
 #define ALT_STDERR_TYPE "altera_avalon_jtag_uart"
 #define ALT_STDIN "/dev/jtag_uart_0"
-#define ALT_STDIN_BASE 0x11408
+#define ALT_STDIN_BASE 0x11808
 #define ALT_STDIN_DEV jtag_uart_0
 #define ALT_STDIN_IS_JTAG_UART
 #define ALT_STDIN_PRESENT
 #define ALT_STDIN_TYPE "altera_avalon_jtag_uart"
 #define ALT_STDOUT "/dev/jtag_uart_0"
-#define ALT_STDOUT_BASE 0x11408
+#define ALT_STDOUT_BASE 0x11808
 #define ALT_STDOUT_DEV jtag_uart_0
 #define ALT_STDOUT_IS_JTAG_UART
 #define ALT_STDOUT_PRESENT
 #define ALT_STDOUT_TYPE "altera_avalon_jtag_uart"
 #define ALT_SYSTEM_NAME "system"
+
+
+/*
+ * blake2s_0 configuration
+ *
+ */
+
+#define ALT_MODULE_CLASS_blake2s_0 blake2s
+#define BLAKE2S_0_BASE 0x11000
+#define BLAKE2S_0_IRQ -1
+#define BLAKE2S_0_IRQ_INTERRUPT_CONTROLLER_ID -1
+#define BLAKE2S_0_NAME "/dev/blake2s_0"
+#define BLAKE2S_0_SPAN 1024
+#define BLAKE2S_0_TYPE "blake2s"
 
 
 /*
@@ -192,7 +207,7 @@
  */
 
 #define ALT_MODULE_CLASS_jtag_uart_0 altera_avalon_jtag_uart
-#define JTAG_UART_0_BASE 0x11408
+#define JTAG_UART_0_BASE 0x11808
 #define JTAG_UART_0_IRQ 0
 #define JTAG_UART_0_IRQ_INTERRUPT_CONTROLLER_ID 0
 #define JTAG_UART_0_NAME "/dev/jtag_uart_0"
@@ -210,7 +225,7 @@
  */
 
 #define ALT_MODULE_CLASS_klein64_0 klein64
-#define KLEIN64_0_BASE 0x11000
+#define KLEIN64_0_BASE 0x11400
 #define KLEIN64_0_IRQ -1
 #define KLEIN64_0_IRQ_INTERRUPT_CONTROLLER_ID -1
 #define KLEIN64_0_NAME "/dev/klein64_0"
