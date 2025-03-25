@@ -1,16 +1,20 @@
-Fitter Status : Successful - Mon Mar 24 16:32:20 2025
+Fitter Status : Successful - Tue Mar 25 14:17:16 2025
 Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 Revision Name : Security
 Top-level Entity Name : Security
-Family : Cyclone IV E
-Device : EP4CE115F29C7
+Family : Cyclone V
+Device : 5CSXFC6D6F31C6
 Timing Models : Final
-Total logic elements : 10,076 / 114,480 ( 9 % )
-    Total combinational functions : 9,233 / 114,480 ( 8 % )
-    Dedicated logic registers : 3,623 / 114,480 ( 3 % )
-Total registers : 3623
-Total pins : 2 / 529 ( < 1 % )
+Logic utilization (in ALMs) : 3,758 / 41,910 ( 9 % )
+Total registers : 4049
+Total pins : 2 / 499 ( < 1 % )
 Total virtual pins : 0
-Total memory bits : 273,408 / 3,981,312 ( 7 % )
-Embedded Multiplier 9-bit elements : 0 / 532 ( 0 % )
-Total PLLs : 0 / 4 ( 0 % )
+Total block memory bits : 273,408 / 5,662,720 ( 5 % )
+Total RAM Blocks : 37 / 553 ( 7 % )
+Total DSP Blocks : 0 / 112 ( 0 % )
+Total HSSI RX PCSs : 0 / 9 ( 0 % )
+Total HSSI PMA RX Deserializers : 0 / 9 ( 0 % )
+Total HSSI TX PCSs : 0 / 9 ( 0 % )
+Total HSSI PMA TX Serializers : 0 / 9 ( 0 % )
+Total PLLs : 0 / 15 ( 0 % )
+Total DLLs : 0 / 4 ( 0 % )

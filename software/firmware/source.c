@@ -55,10 +55,9 @@ void klein_test(void) {
 	block_1 = IORD(KLEIN64_0_BASE, KLEIN_ADDR_RESULT0);
 	block_2 = IORD(KLEIN64_0_BASE, KLEIN_ADDR_RESULT1);
 
-	printf("\r--------------------------------------\r\n");
-	printf("\r# KLEIN-64 - Cipher and Decipher ============================================\r\n");
-	printf("\rInput:      deadbeeff000000f\r\n");
-	printf("\rOutput:     1234567890abcdef\r\n");
+	printf("\r\n# KLEIN-64 - Cipher and Decipher =========================================================\r\n");
+	printf("\rBlock:      deadbeeff000000f\r\n");
+	printf("\rKey:        1234567890abcdef\r\n");
 	printf("\rCipher:     %.8x%.8x\r\n", block_1, block_2);
 
 	// decipher
@@ -99,7 +98,7 @@ void blake2s_test_RFC_7693(void) {
 	while(IORD(BLAKE2S_0_BASE, BLAKE2S_ADDR_STATUS) == 0);
 
 	// read output
-	printf("\r\n----------3. Test blake2s with message in RFC 7693\r\n");
+	printf("\r\n# Blake2s - RFC 7693 input message =======================================================\r\n");
 	printf("Input:    616263\r\n");
 	printf("Output:   ");
 	for(int i = 0; i < 8; i++) {
@@ -108,10 +107,76 @@ void blake2s_test_RFC_7693(void) {
 	printf("\r\nExpected: 508c5e8c327c14e2e1a72ba34eeb452f37458b209ed63a294d999b4c86675982\r\n");
 }
 
+// final test
+void final_test(void) {
+	// klein cipher
+	IOWR(KLEIN64_0_BASE, KLEIN_ADDR_BLOCK0, 0xdeadbeef);
+	IOWR(KLEIN64_0_BASE, KLEIN_ADDR_BLOCK1, 0xf000000f);
+	IOWR(KLEIN64_0_BASE, KLEIN_ADDR_KEY0, 0x12345678);
+	IOWR(KLEIN64_0_BASE, KLEIN_ADDR_KEY1, 0x90abcdef);
+
+	IOWR(KLEIN64_0_BASE, KLEIN_ADDR_CONF, 0x01);
+	IOWR(KLEIN64_0_BASE, KLEIN_ADDR_CTRL, 0x02);
+
+	while(!(IORD(KLEIN64_0_BASE, KLEIN_ADDR_STATUS) == 0x03));
+
+	int block_1, block_2;
+	block_1 = IORD(KLEIN64_0_BASE, KLEIN_ADDR_RESULT0);
+	block_2 = IORD(KLEIN64_0_BASE, KLEIN_ADDR_RESULT1);
+
+	// blake2s hash
+	// clear block
+	for(int i = 0; i < 16; i++)
+		IOWR(BLAKE2S_0_BASE, BLAKE2S_ADDR_BLOCK0 + i, 0x0);
+
+	// init
+	IOWR(BLAKE2S_0_BASE, BLAKE2S_ADDR_CTRL, 0x1);
+	while(IORD(BLAKE2S_0_BASE, BLAKE2S_ADDR_STATUS) == 0);
+
+	// finish
+	IOWR(BLAKE2S_0_BASE, BLAKE2S_ADDR_BLOCK0 + 0, 0xdeadbeef);
+	IOWR(BLAKE2S_0_BASE, BLAKE2S_ADDR_BLOCK0 + 1, 0xf000000f);
+	IOWR(BLAKE2S_0_BASE, BLAKE2S_ADDR_BLOCK0 + 2, 0x12345678);
+	IOWR(BLAKE2S_0_BASE, BLAKE2S_ADDR_BLOCK0 + 3, 0x90abcdef);
+	for(int i = 4; i < 16; i++)
+		IOWR(BLAKE2S_0_BASE, BLAKE2S_ADDR_BLOCK0 + i, 0x0);
+	IOWR(BLAKE2S_0_BASE, BLAKE2S_ADDR_BLOCKLEN, 0x10);
+	IOWR(BLAKE2S_0_BASE, BLAKE2S_ADDR_CTRL, 0x4);
+	while(IORD(BLAKE2S_0_BASE, BLAKE2S_ADDR_STATUS) == 0);
+
+	int hash[8];
+	for(int i = 0; i < 8; i++) {
+		hash[i] = IORD(BLAKE2S_0_BASE, BLAKE2S_ADDR_DIGEST0 + i);
+	}
+
+	// print result
+	printf("\r\n# Final - ================================================================================\r\n");
+//	printf("Input:    616263\r\n");
+	printf("Output:   ");
+	printf("%.8x%.8x", block_1, block_2);
+	for(int i = 0; i < 8; i++) {
+	  printf("%.8x", hash[i]);
+	}
+}
+
+
 void main() {
-	printf("Hello world. \r\n");
+	printf("\r\n======================================\r\n");
+	printf("  SoPC Project - Group 01\r\n");
+	printf("  Topic: SoC - Security\r\n");
+	printf("======================================\r\n");
+	printf("Members:\r\n");
+	printf(" - Bui Thanh Dat            - 21207001\r\n");
+	printf(" - Nguyen Ngoc Thien Kim    - 21207050\r\n");
+	printf(" - Nguyen Thi Tra Chi       - 21207124\r\n");
+	printf(" - Le Quang Dang            - 21207130\r\n");
+	printf(" - Trinh Huy Hoang          - 21207156\r\n");
+	printf("======================================\r\n");
+	printf("Start Program in here\r\n");
+
 	klein_test();
 	blake2s_test_RFC_7693();
+	final_test();
 }
 
 
